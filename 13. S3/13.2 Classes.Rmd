@@ -104,5 +104,32 @@ factor <- function(x, levels = unique(x)) {
 factor(c("a","a","b"))
 ```
 
+```{r scalar style class}
+new_scalar_class <- function(x, y, z){
+  structure(
+    list(
+      x = x,
+      y = y,
+      z = z
+    ),
+    class = "scalar_class"
+    )
+  
+}
+```
+
+```{r data frame style class}
+new_df_class <- function(df, attr1, attr2) {
+  stopifnot(is.data.frame(df))
+  
+  structure(
+    df,
+    attr1 = attr1,
+    attr2 = attr2,
+    class = c("df_class","data.frame")
+  )
+}
+```
+
 
 
