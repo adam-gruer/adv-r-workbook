@@ -96,5 +96,13 @@ validate_factor <- function(x) {
 
 ```
 
+```{r helpers}
+factor <- function(x, levels = unique(x)) {
+  ind <- match(x, levels)
+  validate_factor(new_factor(ind, levels))
+}
+factor(c("a","a","b"))
+```
+
 
 
