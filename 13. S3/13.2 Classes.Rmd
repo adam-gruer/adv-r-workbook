@@ -50,7 +50,50 @@ new_POSIXct  <- function(x, tzone = "") {
 
 new_POSIXct(1)
 
-new_POSIXct(1, tzone = "UTC
+new_POSIXct(1, tzone = "UTC")
+```
+
+```{r validators}
+new_factor <- function(x, levels) {
+  stopifnot(is.integer(x))
+  stopifnot(is.character(levels))
+  
+  structure(
+    x,
+    levels = levels,
+    class = "factor"
+  )
+}
+
+#new_factor(1:5, "a")
+#new_factor(0:1, "a")
+
+
+validate_factor <- function(x) {
+  values <- unclass(x)
+  levels <- attr(x, "levels")
+  
+  if (!all(!is.na(values) & values > 0)) {
+    stop(
+      "All `x` values must be non-missing and greater than zero",
+      call. = FALSE
+    )
+  }
+  
+  if (length(levels) < max(values)) {
+    stop(
+      "There must be at least as many `levels` as possible values in `x`",
+      call. = FALSE
+    )
+  }
+  
+  x
+}
+
+#validate_factor(new_factor(1:5, "a"))
+
+#validate_factor(new_factor(0:1, "a"))
+
 ```
 
 
