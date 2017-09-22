@@ -9,5 +9,49 @@ output: html_notebook
 foo <- structure(list(), class = "foo")
 
 # Create, then set class
+foo <- list()
+class(foo) <- "foo"
+
+# Determine class of foo
+class(foo)
+
+inherits(foo, "foo")
+```
+```{r}
+# create a linear model
+mod <- lm(log(mpg) ~ log(disp), data = mtcars)
+class(mod)
+
+print(mod)
+
+# turn it into a data frame (?!)
+class(mod) <- "data.frame"
+
+mod
 
 ```
+
+```{r constructors}
+new_Date <- function(x){
+  stopifnot(is.double(x))
+  structure(x, class = "Date")
+}
+new_Date(c(-1, 0, 1))
+
+new_POSIXct  <- function(x, tzone = "") {
+  stopifnot(is.double(x))
+  stopifnot(is.character(tzone),length(tzone) == 1)
+  
+  structure(x,
+    class = c("POSIXct", "POSIXt"),
+    tzone = tzone
+  )
+}
+
+new_POSIXct(1)
+
+new_POSIXct(1, tzone = "UTC
+```
+
+
+
