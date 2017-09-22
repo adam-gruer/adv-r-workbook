@@ -1,0 +1,68 @@
+---
+title: "13.1 Basics"
+output: html_notebook
+---
+
+1. The most important S3 objects in base R are factors, data frames, and date/times (Dates, POSIXct, POSIXlt). You’ve already seen the attributes and base type that factors are built on. What base types and attributes are the others built on?
+```{r factor}
+f <- factor("a")
+typeof(f)
+attributes(f)
+```
+```{r data frame}
+df <- data.frame(x = 1:10)
+typeof(df)
+attributes(df)
+```
+```{r Dates}
+d <- as.Date("2017-09-22")
+typeof(d)
+attributes(d)
+
+ct <- as.POSIXct("2017-09-22")
+typeof(ct)
+attributes(ct)
+
+lt <- as.POSIXlt("2017-09-22")
+typeof(lt)
+attributes(lt)
+
+
+```
+
+
+
+
+2. Describe the difference in behaviour in these two calls.
+```{r q2}
+set.seed(1014)
+some_days <- as.Date("2017-01-31") + sample(10, 5)
+
+mean(some_days)
+#> [1] "2017-02-05"
+
+mean(unclass(some_days))
+
+#> [1] 17202
+```
+mean(some_days) is passed an object of class "date" so the mean.Date method is
+called
+mean(unclass(some_days)) is passed a numeric vector so the default mean method is called
+
+What does the following code return? What base type is it built on? What attributes does it use?
+
+```{r ecdf}
+x <- ecdf(rpois(100, 10))
+x
+#> Empirical CDF 
+#> Call: ecdf(rpois(100, 10))
+#>  x[1:18] =  2,  3,  4,  ..., 2e+01, 2e+01
+
+typeof(x)
+attributes(x)
+
+```
+returns a function (or closure).  Base type is closure
+
+
+
