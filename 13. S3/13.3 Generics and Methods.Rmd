@@ -23,3 +23,34 @@ s3_methods_generic("generic")
 getS3method("generic","foo")
 ```
 
+```{r coercion}
+as_factor <- function(x, ...){
+  UseMethod("as_factor")
+}
+
+as_factor.factor <- function(x, ...) x
+
+as_factor.character <- function(x, ...) {
+  factor(x, levels = unique(x))
+}
+
+as_factor.integer <- function(x, ...){
+  factor(x, levels = as.character(unique(x)))
+}
+#as_factor(1)
+
+as_factor.default <- function(x, ...) {
+  stop(
+    "Don't know how to coerce object of class ",
+    paste(class(x), collapse = "/"), " into a factor",
+    call.  = FALSE
+  )
+} 
+  as_factor(1)
+
+```
+
+```{r Arguments}
+
+```
+

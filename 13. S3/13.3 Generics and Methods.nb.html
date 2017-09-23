@@ -174,51 +174,64 @@ $(document).ready(function () {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzbG9vcClcbmdlbmVyaWMgPC0gZnVuY3Rpb24oeCx5LCAuLi4pe1xuICBVc2VNZXRob2QoXCJnZW5lcmljXCIpXG59XG5nZW5lcmljLmZvbyA8LSBmdW5jdGlvbih4LHksIC4uLil7XG4gIG1lc3NhZ2UoKFwiZm9vIG1ldGhvZFwiKSlcbn1cbmdlbmVyaWMuYmFyIDwtIGZ1bmN0aW9uKHgseSwgLi4uKXtcbiAgbWVzc2FnZSgoXCJiYXIgbWV0aG9kXCIpKVxufVxuZ2VuZXJpYyhuZXdfczNfc2NhbGFyKGNsYXNzID0gXCJmb29cIikpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzbG9vcClcbmdlbmVyaWMgPC0gZnVuY3Rpb24oeCx5LCAuLi4pe1xuICBVc2VNZXRob2QoXCJnZW5lcmljXCIpXG59XG5cbmdlbmVyaWMuZm9vIDwtIGZ1bmN0aW9uKHgseSwgLi4uKXtcbiAgbWVzc2FnZSgoXCJmb28gbWV0aG9kXCIpKVxufVxuXG5nZW5lcmljLmJhciA8LSBmdW5jdGlvbih4LHksIC4uLil7XG4gIG1lc3NhZ2UoKFwiYmFyIG1ldGhvZFwiKSlcbn1cblxuZ2VuZXJpYyhuZXdfczNfc2NhbGFyKGNsYXNzID0gXCJmb29cIikpXG5nZW5lcmljKG5ld19zM19zY2FsYXIoY2xhc3MgPSBcImJhclwiKSlcbnMzX21ldGhvZHNfZ2VuZXJpYyhcImdlbmVyaWNcIilcbmdldFMzbWV0aG9kKFwiZ2VuZXJpY1wiLFwiZm9vXCIpXG5gYGAifQ== -->
 <pre class="r"><code>library(sloop)
 generic &lt;- function(x,y, ...){
   UseMethod(&quot;generic&quot;)
 }
+
 generic.foo &lt;- function(x,y, ...){
   message((&quot;foo method&quot;))
 }
+
 generic.bar &lt;- function(x,y, ...){
   message((&quot;bar method&quot;))
 }
-generic(new_s3_scalar(class = &quot;foo&quot;))</code></pre>
+
+generic(new_s3_scalar(class = &quot;foo&quot;))
+generic(new_s3_scalar(class = &quot;bar&quot;))
+s3_methods_generic(&quot;generic&quot;)
+getS3method(&quot;generic&quot;,&quot;foo&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiZm9vIG1ldGhvZFxuIn0= -->
-<pre><code>foo method</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2VuZXJpYyhuZXdfczNfc2NhbGFyKGNsYXNzID0gXCJiYXJcIikpXG5gYGAifQ== -->
-<pre class="r"><code>generic(new_s3_scalar(class = &quot;bar&quot;))</code></pre>
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXNfZmFjdG9yIDwtIGZ1bmN0aW9uKHgsIC4uLil7XG4gIFVzZU1ldGhvZChcImFzX2ZhY3RvclwiKVxufVxuXG5hc19mYWN0b3IuZmFjdG9yIDwtIGZ1bmN0aW9uKHgsIC4uLikgeFxuXG5hc19mYWN0b3IuY2hhcmFjdGVyIDwtIGZ1bmN0aW9uKHgsIC4uLikge1xuICBmYWN0b3IoeCwgbGV2ZWxzID0gdW5pcXVlKHgpKVxufVxuXG5hc19mYWN0b3IuaW50ZWdlciA8LSBmdW5jdGlvbih4LCAuLi4pe1xuICBmYWN0b3IoeCwgbGV2ZWxzID0gYXMuY2hhcmFjdGVyKHVuaXF1ZSh4KSkpXG59XG4jYXNfZmFjdG9yKDEpXG5cbmFzX2ZhY3Rvci5kZWZhdWx0IDwtIGZ1bmN0aW9uKHgsIC4uLikge1xuICBzdG9wKFxuICAgIFwiRG9uJ3Qga25vdyBob3cgdG8gY29lcmNlIG9iamVjdCBvZiBjbGFzcyBcIixcbiAgICBwYXN0ZShjbGFzcyh4KSwgY29sbGFwc2UgPSBcIi9cIiksIFwiIGludG8gYSBmYWN0b3JcIixcbiAgICBjYWxsLiAgPSBGQUxTRVxuICApXG59IFxuICBhc19mYWN0b3IoMSlcblxuYGBgIn0= -->
+<pre class="r"><code>as_factor &lt;- function(x, ...){
+  UseMethod(&quot;as_factor&quot;)
+}
+
+as_factor.factor &lt;- function(x, ...) x
+
+as_factor.character &lt;- function(x, ...) {
+  factor(x, levels = unique(x))
+}
+
+as_factor.integer &lt;- function(x, ...){
+  factor(x, levels = as.character(unique(x)))
+}
+#as_factor(1)
+
+as_factor.default &lt;- function(x, ...) {
+  stop(
+    &quot;Don't know how to coerce object of class &quot;,
+    paste(class(x), collapse = &quot;/&quot;), &quot; into a factor&quot;,
+    call.  = FALSE
+  )
+} 
+  as_factor(1)
+</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiYmFyIG1ldGhvZFxuIn0= -->
-<pre><code>bar method</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuczNfbWV0aG9kc19nZW5lcmljKFwiZ2VuZXJpY1wiKVxuYGBgIn0= -->
-<pre class="r"><code>s3_methods_generic(&quot;generic&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6NCwibnJvdyI6M30sInJkZiI6Ikg0c0lBQUFBQUFBQUE0VlJUVy9ESUF3bGdTd3QwajZrL1k3bXNFdi93S2JkZCtxVkpMUkZwYmdDMHUyNFA3NW1KZ0Z0UTV0MnNMRWYrTm5QdkR4dUh2aUdFMEpLUWhsNmlpRXIwUldFa1dVNDN3aWg5d0ZGdTBPajhhTGVTU090NnY1SmZ4YlJWdGdVYmdGaXVIQUhxYVVIZ3pHZlhvZitYL2FkZ1RmUEdscWhuOHo1VDZRK1NyK0gzbVZTS2lPTzBrVSs5dnZjVmFlRmMrbnVySnhxdFl6cGxZUEJkakpqWFZwNGJSTHpkZGprTzdweEhEL3k5alAxM0Q2QnZCZGVORnVMOVpoZHNwSWFUbDZCd2FJeWZFR1ZGUmMyQTI0SEV5YnBWOTErTUlmVk91NHo3SkRFNllxNDN4U3p1V1U1UnFvcWlaVm1wMHlTWG1uUlNoMlRHMVE4Q1c1T1ZobWZsQ0RxR2c5ZXBIZThBNTJRU1J1NWZBSzlrcTQ0Y0FJQUFBPT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["generic"],"name":[1],"type":["chr"],"align":["left"]},{"label":["class"],"name":[2],"type":["chr"],"align":["left"]},{"label":["visible"],"name":[3],"type":["lgl"],"align":["right"]},{"label":["source"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"generic","2":"bar","3":"TRUE","4":".GlobalEnv"},{"1":"generic","2":"foo","3":"TRUE","4":".GlobalEnv"},{"1":"generic","2":"skeleton","3":"TRUE","4":"methods"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2V0UzNtZXRob2QoXCJnZW5lcmljXCIsXCJmb29cIilcbmBgYCJ9 -->
-<pre class="r"><code>getS3method(&quot;generic&quot;,&quot;foo&quot;)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiZnVuY3Rpb24oeCx5LCAuLi4pe1xuICBtZXNzYWdlKChcImZvbyBtZXRob2RcIikpXG59XG4ifQ== -->
-<pre><code>function(x,y, ...){
-  message((&quot;foo method&quot;))
-}</code></pre>
-<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiMTMuMyBHZW5lcmljcyBhbmQgTWV0aG9kcyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CmxpYnJhcnkoc2xvb3ApCmdlbmVyaWMgPC0gZnVuY3Rpb24oeCx5LCAuLi4pewogIFVzZU1ldGhvZCgiZ2VuZXJpYyIpCn0KCmdlbmVyaWMuZm9vIDwtIGZ1bmN0aW9uKHgseSwgLi4uKXsKICBtZXNzYWdlKCgiZm9vIG1ldGhvZCIpKQp9CgpnZW5lcmljLmJhciA8LSBmdW5jdGlvbih4LHksIC4uLil7CiAgbWVzc2FnZSgoImJhciBtZXRob2QiKSkKfQoKZ2VuZXJpYyhuZXdfczNfc2NhbGFyKGNsYXNzID0gImZvbyIpKQpnZW5lcmljKG5ld19zM19zY2FsYXIoY2xhc3MgPSAiYmFyIikpCnMzX21ldGhvZHNfZ2VuZXJpYygiZ2VuZXJpYyIpCmdldFMzbWV0aG9kKCJnZW5lcmljIiwiZm9vIikKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiMTMuMyBHZW5lcmljcyBhbmQgTWV0aG9kcyIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKYGBge3J9CmxpYnJhcnkoc2xvb3ApCmdlbmVyaWMgPC0gZnVuY3Rpb24oeCx5LCAuLi4pewogIFVzZU1ldGhvZCgiZ2VuZXJpYyIpCn0KCmdlbmVyaWMuZm9vIDwtIGZ1bmN0aW9uKHgseSwgLi4uKXsKICBtZXNzYWdlKCgiZm9vIG1ldGhvZCIpKQp9CgpnZW5lcmljLmJhciA8LSBmdW5jdGlvbih4LHksIC4uLil7CiAgbWVzc2FnZSgoImJhciBtZXRob2QiKSkKfQoKZ2VuZXJpYyhuZXdfczNfc2NhbGFyKGNsYXNzID0gImZvbyIpKQpnZW5lcmljKG5ld19zM19zY2FsYXIoY2xhc3MgPSAiYmFyIikpCnMzX21ldGhvZHNfZ2VuZXJpYygiZ2VuZXJpYyIpCmdldFMzbWV0aG9kKCJnZW5lcmljIiwiZm9vIikKYGBgCgpgYGB7ciBjb2VyY2lvbn0KYXNfZmFjdG9yIDwtIGZ1bmN0aW9uKHgsIC4uLil7CiAgVXNlTWV0aG9kKCJhc19mYWN0b3IiKQp9Cgphc19mYWN0b3IuZmFjdG9yIDwtIGZ1bmN0aW9uKHgsIC4uLikgeAoKYXNfZmFjdG9yLmNoYXJhY3RlciA8LSBmdW5jdGlvbih4LCAuLi4pIHsKICBmYWN0b3IoeCwgbGV2ZWxzID0gdW5pcXVlKHgpKQp9Cgphc19mYWN0b3IuaW50ZWdlciA8LSBmdW5jdGlvbih4LCAuLi4pewogIGZhY3Rvcih4LCBsZXZlbHMgPSBhcy5jaGFyYWN0ZXIodW5pcXVlKHgpKSkKfQojYXNfZmFjdG9yKDEpCgphc19mYWN0b3IuZGVmYXVsdCA8LSBmdW5jdGlvbih4LCAuLi4pIHsKICBzdG9wKAogICAgIkRvbid0IGtub3cgaG93IHRvIGNvZXJjZSBvYmplY3Qgb2YgY2xhc3MgIiwKICAgIHBhc3RlKGNsYXNzKHgpLCBjb2xsYXBzZSA9ICIvIiksICIgaW50byBhIGZhY3RvciIsCiAgICBjYWxsLiAgPSBGQUxTRQogICkKfSAKICBhc19mYWN0b3IoMSkKCmBgYAoKYGBge3IgQXJndW1lbnRzfQoKYGBgCgo=</div>
 
 
 
