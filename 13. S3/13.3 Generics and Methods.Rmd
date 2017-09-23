@@ -1,0 +1,25 @@
+---
+title: "13.3 Generics and Methods"
+output: html_notebook
+---
+
+```{r}
+library(sloop)
+generic <- function(x,y, ...){
+  UseMethod("generic")
+}
+
+generic.foo <- function(x,y, ...){
+  message(("foo method"))
+}
+
+generic.bar <- function(x,y, ...){
+  message(("bar method"))
+}
+
+generic(new_s3_scalar(class = "foo"))
+generic(new_s3_scalar(class = "bar"))
+s3_methods_generic("generic")
+getS3method("generic","foo")
+```
+
