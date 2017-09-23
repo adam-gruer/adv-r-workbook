@@ -1,0 +1,11 @@
+---
+title: "13.4 Method dispatch"
+output: html_notebook
+---
+
+```{r UseMethod() }
+library(sloop)
+x <- Sys.time()
+s3_dispatch(print(x))
+```
+
