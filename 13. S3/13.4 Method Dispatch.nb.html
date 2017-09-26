@@ -185,10 +185,47 @@ s3_dispatch(print(x))</code></pre>
  * print.default</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2hvd29mZiA8LSBmdW5jdGlvbih4KSB7XG4gIFVzZU1ldGhvZChcInNob3dvZmZcIilcbn1cbnNob3dvZmYuZGVmYXVsdCA8LSBmdW5jdGlvbih4KSB7XG4gIG1lc3NhZ2UoXCJzaG93b2ZmLmRlZmF1bHRcIilcbiAgVFJVRVxufVxuc2hvd29mZi5hIDwtIGZ1bmN0aW9uKHgpIHtcbiAgbWVzc2FnZShcInNob3dvZmYuYVwiKVxuICBOZXh0TWV0aG9kKClcbn1cbnNob3dvZmYuYiA8LSBmdW5jdGlvbih4KSB7XG4gICAgbWVzc2FnZShcInNob3dvZmYuYlwiKVxuICAgIE5leHRNZXRob2QoKVxufVxueCA8LSBuZXdfczNfc2NhbGFyKGNsYXNzID0gYyhcImJcIixcImFcIikpXG5zM19kaXNwYXRjaChzaG93b2ZmKHgpKVxuYGBgIn0= -->
+<pre class="r"><code>showoff &lt;- function(x) {
+  UseMethod(&quot;showoff&quot;)
+}
+showoff.default &lt;- function(x) {
+  message(&quot;showoff.default&quot;)
+  TRUE
+}
+showoff.a &lt;- function(x) {
+  message(&quot;showoff.a&quot;)
+  NextMethod()
+}
+showoff.b &lt;- function(x) {
+    message(&quot;showoff.b&quot;)
+    NextMethod()
+}
+x &lt;- new_s3_scalar(class = c(&quot;b&quot;,&quot;a&quot;))
+s3_dispatch(showoff(x))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiLT4gc2hvd29mZi5iXG4gKiBzaG93b2ZmLmFcbiAqIHNob3dvZmYuZGVmYXVsdFxuIn0= -->
+<pre><code>-&gt; showoff.b
+ * showoff.a
+ * showoff.default</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2hvd29mZih4KVxuYGBgIn0= -->
+<pre class="r"><code>showoff(x)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoic2hvd29mZi5iXG5zaG93b2ZmLmFcbnNob3dvZmYuZGVmYXVsdFxuIn0= -->
+<pre><code>showoff.b
+showoff.a
+showoff.default</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFRSVUVcbiJ9 -->
+<pre><code>[1] TRUE</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiMTMuNCBNZXRob2QgZGlzcGF0Y2giCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCmBgYHtyIFVzZU1ldGhvZCgpIH0KbGlicmFyeShzbG9vcCkKeCA8LSBTeXMudGltZSgpCnMzX2Rpc3BhdGNoKHByaW50KHgpKQpgYGAKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiMTMuNCBNZXRob2QgZGlzcGF0Y2giCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCmBgYHtyIFVzZU1ldGhvZCgpIH0KbGlicmFyeShzbG9vcCkKeCA8LSBTeXMudGltZSgpCnMzX2Rpc3BhdGNoKHByaW50KHgpKQpgYGAKYGBge3IgTmV4dE1ldGhvZCgpfQpzaG93b2ZmIDwtIGZ1bmN0aW9uKHgpIHsKICBVc2VNZXRob2QoInNob3dvZmYiKQp9CnNob3dvZmYuZGVmYXVsdCA8LSBmdW5jdGlvbih4KSB7CiAgbWVzc2FnZSgic2hvd29mZi5kZWZhdWx0IikKICBUUlVFCn0KCnNob3dvZmYuYSA8LSBmdW5jdGlvbih4KSB7CiAgbWVzc2FnZSgic2hvd29mZi5hIikKICBOZXh0TWV0aG9kKCkKfQoKc2hvd29mZi5iIDwtIGZ1bmN0aW9uKHgpIHsKICAgIG1lc3NhZ2UoInNob3dvZmYuYiIpCiAgICBOZXh0TWV0aG9kKCkKfQoKeCA8LSBuZXdfczNfc2NhbGFyKGNsYXNzID0gYygiYiIsImEiKSkKczNfZGlzcGF0Y2goc2hvd29mZih4KSkKCnNob3dvZmYoeCkKYGBgCgo=</div>
 
 
 

@@ -8,4 +8,28 @@ library(sloop)
 x <- Sys.time()
 s3_dispatch(print(x))
 ```
+```{r NextMethod()}
+showoff <- function(x) {
+  UseMethod("showoff")
+}
+showoff.default <- function(x) {
+  message("showoff.default")
+  TRUE
+}
+
+showoff.a <- function(x) {
+  message("showoff.a")
+  NextMethod()
+}
+
+showoff.b <- function(x) {
+    message("showoff.b")
+    NextMethod()
+}
+
+x <- new_s3_scalar(class = c("b","a"))
+s3_dispatch(showoff(x))
+
+showoff(x)
+```
 
