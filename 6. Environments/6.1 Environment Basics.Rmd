@@ -1,0 +1,28 @@
+---
+title: "6.1 Environment basics"
+output: html_notebook
+---
+
+```{r}
+e <- new.env()
+e$a <- 1
+e$b <- 2
+ls(e)
+e$a
+
+e$.a <- 2
+ls(e)
+ls(e, all.names = TRUE)
+
+str(e)
+ls.str(e)
+
+e$c <- 3
+e$c
+e[["c"]]
+get("c",envir = e)
+e <- new.env()
+ls(e)
+
+```
+
